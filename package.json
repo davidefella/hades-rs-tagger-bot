@@ -1,0 +1,20 @@
+{
+  "name": "hades_bot_telegram",
+  "version": "1.0.0",
+  "description": "Red stars Tagger Bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": {
+    "name": "Davide aka Dvidi",
+    "email": "thedvidi@gmail.com"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3",
+    "mongoose": "^5.2.9",
+    "node-telegram-bot-api": "^0.30.0"
+  }
+}
