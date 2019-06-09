@@ -23,6 +23,7 @@ var rsLevelStar5 = /5/;
 var rsLevelStar6 = /6/; 
 var rsLevelStar7 = /7/;
 var rsLevelStar8 = /8/; 
+var rsLevelStar8 = /9/; 
 
 var rs = /rs/; 
 var addPlayer2List= /add/; 
@@ -38,24 +39,28 @@ var rgxRs5 = new RegExp(rs.source+rsLevelStar5.source);
 var rgxRs6 = new RegExp(rs.source+rsLevelStar6.source);
 var rgxRs7 = new RegExp(rs.source+rsLevelStar7.source);
 var rgxRs8 = new RegExp(rs.source+rsLevelStar8.source);
+var rgxRs9 = new RegExp(rs.source+rsLevelStar9.source);
 
 var rgxAddPlayer4 = new RegExp(addPlayer2List.source+rsLevelStar4.source);
 var rgxAddPlayer5 = new RegExp(addPlayer2List.source+rsLevelStar5.source);
 var rgxAddPlayer6 = new RegExp(addPlayer2List.source+rsLevelStar6.source);
 var rgxAddPlayer7 = new RegExp(addPlayer2List.source+rsLevelStar7.source);
 var rgxAddPlayer8 = new RegExp(addPlayer2List.source+rsLevelStar8.source);
+var rgxAddPlayer9 = new RegExp(addPlayer2List.source+rsLevelStar9.source);
 
 var rgxGetPlayeRs4 = new RegExp(getPlayersRsList.source+rsLevelStar4.source);
 var rgxGetPlayeRs5 = new RegExp(getPlayersRsList.source+rsLevelStar5.source);
 var rgxGetPlayeRs6 = new RegExp(getPlayersRsList.source+rsLevelStar6.source);
 var rgxGetPlayeRs7 = new RegExp(getPlayersRsList.source+rsLevelStar7.source);
 var rgxGetPlayeRs8 = new RegExp(getPlayersRsList.source+rsLevelStar8.source);
+var rgxGetPlayeRs9 = new RegExp(getPlayersRsList.source+rsLevelStar9.source);
 
 var rgxRemovePlayerRs4 = new RegExp(removePlayerFromList.source+rsLevelStar4.source);
 var rgxRemovePlayerRs5 = new RegExp(removePlayerFromList.source+rsLevelStar5.source);
 var rgxRemovePlayerRs6 = new RegExp(removePlayerFromList.source+rsLevelStar6.source);
 var rgxRemovePlayerRs7 = new RegExp(removePlayerFromList.source+rsLevelStar7.source);
 var rgxRemovePlayerRs8 = new RegExp(removePlayerFromList.source+rsLevelStar8.source);
+var rgxRemovePlayerRs9 = new RegExp(removePlayerFromList.source+rsLevelStar9.source);
 
 var telegramKey = "$TELEGRAM_KEY"; 
 
@@ -166,4 +171,22 @@ rst_bot.onText(rgxGetPlayeRs8, function (msg) {
 
 rst_bot.onText(rgxRemovePlayerRs8, function (msg) {
     playersHandler.removePlayerFromList(msg, 8, rst_bot); 
+});
+
+
+/* RS9 FUNCTIONS */
+rst_bot.onText(rgxRs9, function (msg) {
+    playersHandler.tagPlayersList(msg, 9, rst_bot); 
+})
+
+rst_bot.onText(rgxAddPlayer9, function (msg) {
+    playersHandler.addPlayerToRsList(msg, 9, rst_bot);
+});
+
+rst_bot.onText(rgxGetPlayeRs9, function (msg) {
+    playersHandler.sendPlayersList(msg, 9, rst_bot); 
+});
+
+rst_bot.onText(rgxRemovePlayerRs9, function (msg) {
+    playersHandler.removePlayerFromList(msg, 9, rst_bot); 
 });
