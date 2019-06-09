@@ -8,7 +8,7 @@ var app = express().listen(PORT, () => console.log(`Listening on ${ PORT }`));
 
 var mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
-mongoose.connect("mongodb://admin:password1@ds125352.mlab.com:25352/hadesrsbot");
+mongoose.connect("STRING_CONNECTION");
 
 require('./server/model/player.server.model.js');
 
