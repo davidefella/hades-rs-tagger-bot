@@ -8,7 +8,7 @@ var app = express().listen(PORT, () => console.log(`Listening on ${ PORT }`));
 
 var mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
-mongoose.connect("STRING_CONNECTION");
+mongoose.connect("mongodb://admin:password1@ds125352.mlab.com:25352/hadesrsbot");
 
 require('./server/model/player.server.model.js');
 
@@ -23,7 +23,7 @@ var rsLevelStar5 = /5/;
 var rsLevelStar6 = /6/; 
 var rsLevelStar7 = /7/;
 var rsLevelStar8 = /8/; 
-var rsLevelStar8 = /9/; 
+var rsLevelStar9 = /9/; 
 
 var rs = /rs/; 
 var addPlayer2List= /add/; 
@@ -62,7 +62,7 @@ var rgxRemovePlayerRs7 = new RegExp(removePlayerFromList.source+rsLevelStar7.sou
 var rgxRemovePlayerRs8 = new RegExp(removePlayerFromList.source+rsLevelStar8.source);
 var rgxRemovePlayerRs9 = new RegExp(removePlayerFromList.source+rsLevelStar9.source);
 
-var telegramKey = "$TELEGRAM_KEY"; 
+var telegramKey = "629354550:AAEkcUAsRM2yx-HN3qdAQEf1AVrK7ULAgSo"; 
 
 
 var TelegramBot = require('node-telegram-bot-api'),
@@ -73,7 +73,7 @@ rst_bot = new TelegramBot(telegramKey, { polling: true });
 rst_bot.onText(helpCommand, function (msg) {
     appUtility.help(rst_bot, msg); 
 }); 
-
+ 
 rst_bot.onText(botInfoCommand, function (msg) {
     appUtility.version(rst_bot, msg); 
 });     
@@ -92,9 +92,9 @@ rst_bot.onText(rgxAddPlayer4, function (msg) {
     playersHandler.addPlayerToRsList(msg, 4, rst_bot);
 });
 
-rst_bot.onText(rgxGetPlayeRs4, function (msg) {
+/*rst_bot.onText(rgxGetPlayeRs4, function (msg) {
     playersHandler.sendPlayersList(msg, 4, rst_bot); 
-});
+});*/
 
 rst_bot.onText(rgxRemovePlayerRs4, function (msg) {
     playersHandler.removePlayerFromList(msg, 4, rst_bot); 
@@ -110,9 +110,9 @@ rst_bot.onText(rgxAddPlayer5, function (msg) {
     playersHandler.addPlayerToRsList(msg, 5, rst_bot);
 });
 
-rst_bot.onText(rgxGetPlayeRs5, function (msg) {
+/*rst_bot.onText(rgxGetPlayeRs5, function (msg) {
     playersHandler.sendPlayersList(msg, 5, rst_bot); 
-});
+});*/
 
 rst_bot.onText(rgxRemovePlayerRs5, function (msg) {
     playersHandler.removePlayerFromList(msg, 5, rst_bot); 
@@ -129,9 +129,9 @@ rst_bot.onText(rgxAddPlayer6, function (msg) {
     playersHandler.addPlayerToRsList(msg, 6, rst_bot);
 });
 
-rst_bot.onText(rgxGetPlayeRs6, function (msg) {
+/*rst_bot.onText(rgxGetPlayeRs6, function (msg) {
     playersHandler.sendPlayersList(msg, 6, rst_bot); 
-});
+});*/
 
 rst_bot.onText(rgxRemovePlayerRs6, function (msg) {
     playersHandler.removePlayerFromList(msg, 6, rst_bot); 
@@ -147,9 +147,9 @@ rst_bot.onText(rgxAddPlayer7, function (msg) {
     playersHandler.addPlayerToRsList(msg, 7, rst_bot);
 });
 
-rst_bot.onText(rgxGetPlayeRs7, function (msg) {
+/*rst_bot.onText(rgxGetPlayeRs7, function (msg) {
     playersHandler.sendPlayersList(msg, 7, rst_bot); 
-});
+});*/
 
 rst_bot.onText(rgxRemovePlayerRs7, function (msg) {
     playersHandler.removePlayerFromList(msg, 7, rst_bot); 
@@ -165,9 +165,9 @@ rst_bot.onText(rgxAddPlayer8, function (msg) {
     playersHandler.addPlayerToRsList(msg, 8, rst_bot);
 });
 
-rst_bot.onText(rgxGetPlayeRs8, function (msg) {
+/*rst_bot.onText(rgxGetPlayeRs8, function (msg) {
     playersHandler.sendPlayersList(msg, 8, rst_bot); 
-});
+});*/
 
 rst_bot.onText(rgxRemovePlayerRs8, function (msg) {
     playersHandler.removePlayerFromList(msg, 8, rst_bot); 
@@ -183,10 +183,35 @@ rst_bot.onText(rgxAddPlayer9, function (msg) {
     playersHandler.addPlayerToRsList(msg, 9, rst_bot);
 });
 
-rst_bot.onText(rgxGetPlayeRs9, function (msg) {
+/*rst_bot.onText(rgxGetPlayeRs9, function (msg) {
     playersHandler.sendPlayersList(msg, 9, rst_bot); 
-});
+});*/
 
 rst_bot.onText(rgxRemovePlayerRs9, function (msg) {
     playersHandler.removePlayerFromList(msg, 9, rst_bot); 
 });
+
+/**
+ * 
+ * Nota, onText fa match tra rgxGetPlayeRs8 (che è quello che voglio intercettare)
+ * e il testo scritto sulla chat
+ */
+
+let numberStarLevel = 8; 
+
+for(var i=1; i<=numberStarLevel; i++){
+    var listRgx = new RegExp("list".concat(i)); 
+    console.log(listRgx); 
+ 
+    rst_bot.onText(listRgx, function (msg) {
+        var redStarLevel = msg.text.substr(msg.text.length-1); 
+
+        playersHandler.sendPlayersList(msg, redStarLevel, rst_bot); 
+
+    });
+
+}
+
+
+
+

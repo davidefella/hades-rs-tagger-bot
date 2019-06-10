@@ -2,7 +2,7 @@ var express = require("express");
 
 var mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
-mongoose.connect("mongodb://$INFO_BOT_DB");
+mongoose.connect("mongodb://admin:password1@ds125352.mlab.com:25352/hadesrsbot");
 
 require('../model/player.server.model.js');
 
