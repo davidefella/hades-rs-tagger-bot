@@ -1,30 +1,22 @@
-/*var express = require("express");
-var port = 3000;
-const PORT = process.env.PORT || 5000*/
-
-
-//var app = express().listen(PORT, () => console.log(`Listening on ${PORT}`));
-
-
+var keys = require("./secure/Keys");
 var mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
-mongoose.connect("mongodb://admin:password1@ds125352.mlab.com:25352/hadesrsbot");
+mongoose.connect(keys.dbString);
 
 require('./server/model/player.server.model.js');
 
-var Player = require('mongoose').model("Player");
-
-//var commonFunctions = require('./server/controllers/common-functions.js');
 var playersHandler = require('./server/controllers/playersHandler.js');
 var appUtility = require('./server/controllers/appUtility.js');
+var TelegramBot = require('node-telegram-bot-api'); 
+
+
 var helpCommand = /help/;
 var botInfoCommand = /info/;
 var playersInfoCommand = /aboutme/;
 
-var telegramKey = "629354550:AAEkcUAsRM2yx-HN3qdAQEf1AVrK7ULAgSo";
+var telegramKey = keys.telegramDevToken;
 
-var TelegramBot = require('node-telegram-bot-api'),
-    rst_bot = new TelegramBot(telegramKey, { polling: true });
+var rst_bot = new TelegramBot(telegramKey, { polling: true });
 
 
 /* COMMON FUNCTION */
@@ -47,30 +39,30 @@ rst_bot.onText(playersInfoCommand, function (msg) {
  */
 
 let numberStarLevel = 9;
+var redStarLevel = 0; 
 
 for (var i = 1; i <= numberStarLevel; i++) {
     rst_bot.onText(new RegExp("list".concat(i)), function (msg) {
-        var redStarLevel = msg.text.substr(msg.text.length);
+        redStarLevel = msg.text.substr(msg.text.length-1);
 
         playersHandler.sendPlayersList(msg, redStarLevel, rst_bot);
     });
 
     rst_bot.onText(new RegExp("remove".concat(i)), function (msg) {
-        var redStarLevel = msg.text.substr(msg.text.length);
+        redStarLevel = msg.text.substr(msg.text.length-1);
 
         playersHandler.removePlayerFromList(msg, redStarLevel, rst_bot);
     });
 
     rst_bot.onText(new RegExp("add".concat(i)), function (msg) {
-        var redStarLevel = msg.text.substr(msg.text.length);
+        redStarLevel = msg.text.substr(msg.text.length-1);
 
         playersHandler.addPlayerToRsList(msg, redStarLevel, rst_bot);
     });
 
     rst_bot.onText(new RegExp("rs".concat(i)), function (msg) {
-        var redStarLevel = msg.text.substr(msg.text.length);
+        redStarLevel = msg.text.substr(msg.text.length-1);
 
         playersHandler.tagPlayersList(msg, redStarLevel, rst_bot);
     });
-
 }
