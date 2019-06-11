@@ -1,4 +1,4 @@
-var keys = require("./secure/Keys");
+var keys = require("./secure/keys");
 var mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
 mongoose.connect(keys.dbString);
