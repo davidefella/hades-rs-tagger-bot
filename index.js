@@ -1,7 +1,7 @@
-var keys = require("./secure/keys");
+var keyStore = require("./secure/keyStore");
 var mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
-mongoose.connect(keys.dbString);
+mongoose.connect(keyStore.dbString);
 
 require('./server/model/player.server.model.js');
 
@@ -14,7 +14,7 @@ var helpCommand = /help/;
 var botInfoCommand = /info/;
 var playersInfoCommand = /aboutme/;
 
-var telegramKey = keys.telegramDevToken;
+var telegramKey = keyStore.telegramDevToken;
 
 var rst_bot = new TelegramBot(telegramKey, { polling: true });
 
