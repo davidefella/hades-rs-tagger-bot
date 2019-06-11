@@ -61,4 +61,4 @@ typings/
 .next
 
 # key store
-./secure/keys.js
+secure/keys.js
