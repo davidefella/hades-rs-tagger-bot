@@ -19,5 +19,5 @@ exports.help = function (rst_bot, msg) {
 exports.version = function (rst_bot, msg) {
 
     rst_bot.sendMessage(msg.chat.id.toString(), info);
-
+    
 }; 
