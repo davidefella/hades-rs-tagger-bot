@@ -1,5 +1,3 @@
-var express = require("express");
-
 var mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
 mongoose.connect("mongodb://admin:password1@ds125352.mlab.com:25352/hadesrsbot");

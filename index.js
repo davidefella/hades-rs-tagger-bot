@@ -1,3 +1,5 @@
+console.log("First test"); 
+
 var keyStore = require("./secure/keyStore");
 var mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
