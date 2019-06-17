@@ -1,4 +1,9 @@
 console.log("First test"); 
+console.log(process.env.NODE_ENV); 
+
+
+const express = require('express');
+const app = express(); 
 
 var keyStore = require("./secure/keyStore");
 var mongoose = require("mongoose");
@@ -16,7 +21,7 @@ var helpCommand = /help/;
 var botInfoCommand = /info/;
 var playersInfoCommand = /aboutme/;
 
-var telegramKey = keyStore.telegramDevToken;
+var telegramKey = keyStore.telegramBotToken;
 
 var rst_bot = new TelegramBot(telegramKey, { polling: true });
 
@@ -68,3 +73,11 @@ for (var i = 1; i <= numberStarLevel; i++) {
         playersHandler.tagPlayersList(msg, redStarLevel, rst_bot);
     });
 }
+
+
+app.get('/', (req, res) => {
+    res.send({status: 'running'}); 
+}); 
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT); 
