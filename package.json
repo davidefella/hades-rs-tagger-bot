@@ -19,7 +19,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
-    "mongoose": "^5.5.14",
+    "mongoose": "^5.7.5",
     "node-telegram-bot-api": "^0.30.0",
     "nodemon": "^1.19.1"
   }
